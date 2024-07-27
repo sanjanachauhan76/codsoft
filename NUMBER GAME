@@ -1,0 +1,51 @@
+import random
+
+class NumberGuessingGame:
+    def __init__(self, range_start=1, range_end=100, max_attempts=10):
+        self.range_start = range_start
+        self.range_end = range_end
+        self.max_attempts = max_attempts
+        self.score = 0
+
+    def start_game(self):
+        print(f"Welcome to the Number Guessing Game!")
+        while True:
+            self.play_round()
+            play_again = input("Do you want to play another round? (yes/no): ").strip().lower()
+            if play_again != 'yes':
+                break
+        print(f"Thank you for playing! Your final score is {self.score}.")
+
+    def play_round(self):
+        target_number = random.randint(self.range_start, self.range_end)
+        attempts = 0
+
+        print(f"\nGuess the number between {self.range_start} and {self.range_end}. You have {self.max_attempts} attempts.")
+        
+        while attempts < self.max_attempts:
+            guess = self.get_user_guess()
+            attempts += 1
+
+            if guess == target_number:
+                print(f"Congratulations! You guessed the correct number {target_number} in {attempts} attempts.")
+                self.score += 1
+                return
+            elif guess < target_number:
+                print("Too low! Try again.")
+            else:
+                print("Too high! Try again.")
+
+        print(f"Sorry, you've used all {self.max_attempts} attempts. The correct number was {target_number}.")
+
+    def get_user_guess(self):
+        while True:
+            try:
+                guess = int(input("Enter your guess: "))
+                if self.range_start <= guess <= self.range_end:
+                    return guess
+                else:
+                    print(f"Please enter a number between {self.range_start} and {self.range_end}.")
+            except ValueError:
+                print("Invalid input. Please enter a valid number.")
+
+
