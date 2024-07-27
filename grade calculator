@@ -1,0 +1,24 @@
+def calculate_grade(average_percentage):
+    if average_percentage >= 90:
+        return 'A'
+    elif average_percentage >= 80:
+        return 'B'
+    elif average_percentage >= 70:
+        return 'C'
+    elif average_percentage >= 60:
+        return 'D'
+    else:
+        return 'F'
+
+def student_grade_calculator(marks):
+    total_marks = sum(marks)
+    num_subjects = len(marks)
+    average_percentage = total_marks / num_subjects
+
+    grade = calculate_grade(average_percentage)
+
+    print(f"Total Marks: {total_marks}")
+    print(f"Average Percentage: {average_percentage:.2f}%")
+    print(f"Grade: {grade}")
+
+
